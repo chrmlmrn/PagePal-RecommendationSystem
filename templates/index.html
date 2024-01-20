@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PagePal Book Recommendation System</title>
+
+    <style>
+        body{
+            background-color: #fff2D8;
+        }
+
+        #head, h3{
+            font-family: Arial, sans-serif;
+            font-size: 25px;
+            padding-left: 25px;
+            text-align: center;
+            background-color: #fff2D8;
+        }
+
+        h3{
+            text-align: center;
+        }
+
+        #submit {
+            width: 75px;
+            padding: 10px;
+            margin: 1px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #ead7bb;
+            font-size: 16px;
+            color: #333;
+            box-shadow: 0 2px 4px #113946;
+        }
+
+        #title{
+            width: 25%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #ead7bb;
+            font-size: 16px;
+            color: #333;
+            box-shadow: 0 2px 4px #113946;
+        }
+
+        #wrapper {
+            font-family: Arial, sans-serif;
+            background-color: #fff2D8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tile-showcase {
+            list-style-type: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 20px;
+        }
+
+        .tile {
+            background-color: #fff2D8;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px #113946;;
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div id="head">
+    <h1>PagePal Book Recommendation System</h1>
+    <form action="/recommendations" method="GET">
+        <label for="title"><i>Enter a Book title</i></label><br>
+        <input type="text" id="title" name="title">
+        <input type="submit" id="submit" value="Search">
+    </form>
+    </div>
+    <div id="recommendations">
+        {% if recommendations %}
+            <h3>Books similar to "{{ query_title }}":</h3>
+            <div id="wrapper">
+               
+                <ul class="tile-showcase">
+                    {% for title, image_url in recommendations %}
+                        <li class="tile">
+                            <img src="{{ image_url }}" alt="{{ title }}" height="150">
+                            <p>{{ title }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
